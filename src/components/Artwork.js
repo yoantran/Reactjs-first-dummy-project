@@ -1,6 +1,15 @@
+import Modal from "./Modal";
+import Backdrop from "./Backdrop";
+import { useState } from "react";
+
 function Artwork(props) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   function deleteHandler() {
-    console.log("yayyy you clicked it!");
+    setModalIsOpen(true);
+  }
+  function cancelModalHandler() {
+    setModalIsOpen(false);
   }
 
   return (
@@ -11,6 +20,10 @@ function Artwork(props) {
           Delete
         </button>
       </div>
+      {modalIsOpen && (
+        <Modal onCancel={cancelModalHandler} onConfirm={cancelModalHandler} />
+      )}
+      {modalIsOpen && <Backdrop onCancel={cancelModalHandler} />}
     </div>
   );
 }
